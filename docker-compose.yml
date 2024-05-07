@@ -11,8 +11,8 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: pass
     volumes:
-      - ./db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
-      - ./mysql_data:/var/lib/mysql
+      - ./micro-services/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - ./micro-services/mysql_data:/var/lib/mysql
     healthcheck:
       test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
       start_period: 5s
@@ -22,7 +22,8 @@ services:
 
   backend:
     build:
-      context: ./backend
+      dockerfile: ./micro-services/backend/Dockerfile.backend
+      context: ./
     ports:
       - "8081:8080"
     restart: on-failure
@@ -41,13 +42,14 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./micro-services/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
       - backend
 
   frontend:
     build:
-      context: ./frontend
+      dockerfile: ./micro-services/frontend/Dockerfile.frontend
+      context: ./
     ports:
       - "8000:80"
     depends_on:

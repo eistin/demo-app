@@ -5,7 +5,7 @@ FROM php:apache
 WORKDIR /var/www/html
 
 # Copy the PHP files into the container
-COPY . .
+COPY ./micro-services/frontend/ .
 
 # Expose port 80
 EXPOSE 80

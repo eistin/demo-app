@@ -11,11 +11,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - dockerfile: ./micro-services/backend/Dockerfile
-            context: ./micro-services/backend
+          - dockerfile: ./micro-services/backend/Dockerfile.backend
             tag: backend
-          - dockerfile: ./micro-services/frontend/Dockerfile
-            context: ./micro-services/frontend
+          - dockerfile: ./micro-services/frontend/Dockerfile.frontend
             tag: frontend
     steps:
       -
@@ -34,7 +32,6 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: ${{ matrix.context }}
           file: ${{ matrix.dockerfile }}
           push: true
           tags: ${{ vars.REPOSITORY_NAME }}:${{ matrix.tag }}

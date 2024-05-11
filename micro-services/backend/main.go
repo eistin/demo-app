@@ -38,6 +38,7 @@ func main() {
 	log.Println("DB Connection OK")
 
 	// Routes
+	http.HandleFunc("/", rootHandler)
 	http.HandleFunc("/increment", incrementHandler)
 	http.HandleFunc("/decrement", decrementHandler)
 	http.HandleFunc("/current", currentHandler)
@@ -45,6 +46,11 @@ func main() {
 	// Start server
 	log.Println("Server started at :8080")
 	http.ListenAndServe(":8080", nil)
+}
+
+func rootHandler(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	fmt.Fprintf(w, "Server is up and running!")
 }
 
 func incrementHandler(w http.ResponseWriter, r *http.Request) {

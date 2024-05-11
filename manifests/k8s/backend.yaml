@@ -18,6 +18,11 @@ spec:
           - name: backend
             image: edwinistin/kubernetes-app-image:backend
             imagePullPolicy: Always
+            envFrom:
+              - configMapRef:
+                name: backend-config
+              - secretRef:
+                name: backend-secret
             ports:
               - containerPort: 8080
             resources:
@@ -61,3 +66,24 @@ spec:
       port: 80
       targetPort: 80
   type: ClusterIP
+
+---
+
+# backend-configmap.yaml
+
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: backend-config
+#   namespace: demo-app
+#   labels:
+#     app: backend
+# data:
+#   MYSQL_HOST: "db"
+#   MYSQL_PORT: "3306"
+#   MYSQL_USER: "user"
+#   MYSQL_DBNAME: "counter_db"
+
+---
+
+# backend-secret.yaml

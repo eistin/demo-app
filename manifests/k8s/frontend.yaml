@@ -64,3 +64,17 @@ spec:
       port: 80
       targetPort: 80
   type: ClusterIP
+
+---
+
+# frontend-configmap.yaml
+
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: frontend-config
+#   namespace: demo-app
+#   labels:
+#     app: frontend
+# data:
+#   API_URL: http://localhost:8080

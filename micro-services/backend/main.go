@@ -43,9 +43,12 @@ func main() {
 	http.HandleFunc("/decrement", decrementHandler)
 	http.HandleFunc("/current", currentHandler)
 
+	// Wrap the main router with CORS middleware
+	handler := addCorsHeaders(http.DefaultServeMux)
+
 	// Start server
 	log.Println("Server started at :8080")
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":8080", addCorsHeaders(handler))
 }
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
@@ -92,13 +95,15 @@ func currentHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 // addCorsHeaders adds the necessary CORS headers to the HTTP handler.
-// func addCorsHeaders(handler http.Handler) http.Handler {
-// 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-// 		w.Header().Set("Access-Control-Allow-Origin", "*")
-// 		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-// 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+func addCorsHeaders(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+		w.Header().Set("Access-Control-Allow-Credentials", "true")
+		w.Header().Set("Vary", "Origin")
 
-// 		// Call the next handler in the chain
-// 		handler.ServeHTTP(w, r)
-// 	})
-// }
+		// Call the next handler in the chain
+		next.ServeHTTP(w, r)
+	})
+}

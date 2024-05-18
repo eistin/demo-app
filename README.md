@@ -70,22 +70,19 @@ docker-compose up --build
 ### Deployment with Helm
 
 1. Ensure [Helm is installed](https://helm.sh/docs/intro/install/).
-
-2. Apply the Helm charts provided in the helm-charts directory. For example, to deploy the backend service:
-
+2. Ensure to have a running MySQL database and adapt the values in the [backend values file](./helm-charts/backend/values.local.yaml).
+3. Create the backend-secret file containing MYSQL_PASSWORD. You can get the file in the [demo-ansible-k8s](manifests/demo-app/demo-backend-secret.yaml) repository.
+4. Apply the Helm charts provided in the helm-charts directory. For example, to deploy the backend service:
 ```
 cd helm-charts/backend
 helm install backend . -f values.local.yaml -n demo-app --create-namespace
 ```
-> :warning: For the backend service, an external secret containing MYSQL_PASSWORD is needed.
-
-3. Repeat the same process for the frontend service.
+5. Repeat the same process for the frontend service.
 ```
 cd helm-charts/frontend
 helm install frontend . -f values.local.yaml -n demo-app --create-namespace
 ```
-
-4. Then you can port-forward the services.
+6. Then you can port-forward the services.
 ```
 kubectl port-forward svc/demo-frontend -n demo-app 8000:80 & \
 kubectl port-forward svc/demo-backend -n demo-app 8080:8080

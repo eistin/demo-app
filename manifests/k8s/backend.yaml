@@ -71,24 +71,24 @@ spec:
 
 # backend-configmap.yaml
 
-# apiVersion: v1
-# kind: ConfigMap
-# metadata:
-#   name: backend-config
-#   namespace: demo-app
-#   labels:
-#     app: backend
-# data:
-#   MYSQL_HOST: "mysql-demo"
-#   MYSQL_PORT: "3306"
-#   MYSQL_USER: "user"
-#   MYSQL_DBNAME: "counter_db"
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+  namespace: demo-app
+  labels:
+    app: backend
+data:
+  MYSQL_HOST: "mysql-demo"
+  MYSQL_PORT: "3306"
+  MYSQL_USER: "user"
+  MYSQL_DBNAME: "counter_db"
 
 
 ---
 
 # backend-secret.yaml
-# generated from 
+# this file has been generated in the project https://github.com/eistin/demo-ansible-k8s
 
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret

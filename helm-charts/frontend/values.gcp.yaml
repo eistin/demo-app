@@ -1,0 +1,10 @@
+# Here our app is exposed from an Ingress with a default backend. This demo doesn't have domain name, so it's exposed from a static IP. 
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "frontend-ip"
+  backendType: "defaultBackend"
+
+# The API is exposed through a static API. Ideally it should be exposed through a domain name.
+env:
+  apiUrl: "http://35.190.25.111:80"

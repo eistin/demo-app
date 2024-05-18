@@ -1,0 +1,3 @@
+# Here we assume that when it will be deployed locally, the API will be accessible from localhost:8080 (port-forwarding)
+env:
+  apiUrl: "http://localhost:8080"

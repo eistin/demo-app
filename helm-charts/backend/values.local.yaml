@@ -1,0 +1,9 @@
+# Name of the secret containing the data MYSQL_PASSWORD
+secretName: "backend-secret"
+
+# These env variables correspond to the kubedb deployed from the project https://github.com/eistin/demo-ansible-k8s
+env:
+  mySqlHost: "mysql-demo"
+  mySqlPort: "3306"
+  mySqlUser: "user"
+  mySqlDbName: "counter_db"

@@ -1,0 +1,16 @@
+# Here our app is exposed from an Ingress with a default backend. This demo doesn't have domain name, so it's exposed from a static IP. 
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "backend-ip"
+  backendType: "defaultBackend"
+
+# Name of the secret containing the data MYSQL_PASSWORD
+secretName: "backend-secret"
+
+# These are the info of the private CloudSQL 
+env:
+  mySqlHost: "10.109.179.3"
+  mySqlPort: "3306"
+  mySqlUser: "user"
+  mySqlDbName: "counter_db"

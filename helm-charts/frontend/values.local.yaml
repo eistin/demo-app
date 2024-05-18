@@ -1,3 +1,11 @@
+resources:
+  limits:
+    cpu: "0.5"
+    memory: "512Mi"
+  requests:
+    cpu: "0.1"
+    memory: "256Mi"
+
 # Here we assume that when it will be deployed locally, the API will be accessible from localhost:8080 (port-forwarding)
 env:
   apiUrl: "http://localhost:8080"

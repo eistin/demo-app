@@ -1,3 +1,11 @@
+resources:
+  limits:
+    cpu: "0.5"
+    memory: "512Mi"
+  requests:
+    cpu: "0.1"
+    memory: "256Mi"
+
 # Name of the secret containing the data MYSQL_PASSWORD
 secretName: "backend-secret"
 

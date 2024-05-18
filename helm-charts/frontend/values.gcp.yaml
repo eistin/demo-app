@@ -1,3 +1,11 @@
+resources:
+  limits:
+    cpu: "0.5"
+    memory: "512Mi"
+  requests:
+    cpu: "0.1"
+    memory: "256Mi"
+
 # Here our app is exposed from an Ingress with a default backend. This demo doesn't have domain name, so it's exposed from a static IP. 
 ingress:
   enabled: true

@@ -2,6 +2,8 @@
 
 This repository contains a demo microservices application implementing a simple counter app. The application consists of separate backend and frontend services, along with supporting components like a database and Nginx server.
 
+It is part of a set of repositories that allow to deploy a demo-app on gcp, here is the link to the [general documentation](https://github.com/eistin/demo-docs).
+
 ## Overview
 The counter app is designed to demonstrate the interaction between multiple microservices in a containerized environment. The backend service, implemented in Go, provides APIs to increment and retrieve the counter value. The frontend, written in PHP, interacts with the backend APIs to display the current counter value and allows users to increment it.
 
